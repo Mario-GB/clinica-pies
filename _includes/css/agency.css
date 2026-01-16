@@ -188,7 +188,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-collapse {
-    border-color: rgba(255,255,255,.02);
+    border-color: var(--color-primary-green);
 }
 
 .navbar-default .navbar-toggle {
