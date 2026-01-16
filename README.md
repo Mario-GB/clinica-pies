@@ -1,3 +1,4 @@
+## Clinica Pies
 Agency Jekyll theme
 ====================
 
@@ -24,7 +25,7 @@ Images are in '/img/team/'
 
 # Demo
 
-View this jekyll theme in action [here](https://y7kim.github.io/agency-jekyll-theme)
+View this jekyll theme in action [here](https://mario-gb.github.io/clinica-pies/)
 
 =========
 For more details, read [documentation](http://jekyllrb.com/)
