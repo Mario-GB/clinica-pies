@@ -8,7 +8,23 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
+                {% for service in site.services %}
+                {% assign idx = forloop.index0 | modulo:3 | plus:1 %}
+                <div class="col-md-4 service-{{ idx }}">
+                    <span class="fa-stack fa-4x">
+                        {% if service.icon %}
+                        <i class="fa fa-circle fa-stack-2x text-primary-{{ idx }}"></i>
+                        <i class="fa {{ service.icon }} fa-stack-1x fa-inverse"></i>
+                        {% else %}
+                        <img src="img/services/{{ service.picname }}.png" class="img-responsive img-centered" alt="">
+                        {% endif %}
+                    </span>
+                    <h4 class="service-heading">{{ service.title }}</h4>
+                    <h5 class="service-heading">{{ service.subtitle }}</h5>
+                    <p class="text-muted">{{ service.description }}</p>
+                </div>
+                {% endfor %}
+<!--                <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
@@ -46,41 +62,12 @@
                 </div>
                 <div class="col-md-5">
                     <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                        <img src="img/services/{{ post.thumbnail }}" class="img-responsive img-centered" alt="">
                     </span>
                     <h4 class="service-heading">INFECCIONES POR HONGOS A NIVEL DE UÑAS</h4>
                     <h5 class="service-heading"></h5>
                     <p class="text-muted">Son afecciones que provocan el engrosamiento, decoloración, fragilidad y deformidad de las uñas, generalmente en los pies, debido a la invasión de dermatofitos, levaduras u otros hongos.</p>
-                </div>
-                <div class="col-md-5">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">VERRUGA PLANTAR</h4>
-                    <h5 class="service-heading">(PAPILOMA)</h5>
-                    <p class="text-muted">Es una lesión cutánea causada por el virus del papiloma humano (VPH). Aparece como una protuberancia en la planta del pie, a menudo con puntos negros (capilares trombosados) y rodeada de piel endurecida, causando dolor al presionarla.</p>
-                </div>
-                <div class="col-md-6">Avanzados en técnología</div>
-                <div class="col-md-7">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">EXPLORACIÓN BIOMECÁNICA Y ANÁLISIS DE LA MARCHA</h4>
-                    <h5 class="service-heading"></h5>
-                    <p class="text-muted">Son procedimientos podológicos que evalúan la estructura, función y alineación del pie y las extremidades inferiores, tanto en estática como en dinámica, para detectar alteraciones que puedan afectar la pisada o la locomoción.</p>
-                </div>
-                <div class="col-md-7">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">TRATAMIENTOS ORTOPODOLÓGICOS</h4>
-                    <h5 class="service-heading"></h5>
-                    <p class="text-muted">Son procedimientos podológicos que emplean soportes plantares, ortesis digitales u otros dispositivos personalizados para corregir alteraciones.</p>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
