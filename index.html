@@ -1,20 +1,217 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica Pies | Consulta de podología en Brunete</title>
+    <meta name="description" content="Clínica de podología en Brunete. Tratamientos de durezas, uñas encarnadas, hongos, verrugas y seguimiento biomecánico." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/simplepage.css" />
+  </head>
+  <body>
+    <div class="simplepage-shell">
+      <header class="simplepage-hero" id="top">
+        <nav class="simplepage-nav">
+          <div class="container nav-inner">
+            <a href="#top" class="brand"><span class="brand-mark">CP</span> Clínica Pies</a>
+            <div class="nav-links">
+              <a href="#about">Sobre nosotros</a>
+              <a href="#services">Servicios</a>
+              <a href="#contact">Contacto</a>
+            </div>
+          </div>
+        </nav>
 
-<div class="home">
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Podología profesional</p>
+            <h1>Tu clínica de podología en Brunete y alrededores</h1>
+            <p class="lead">
+              El podólogo es el profesional sanitario especialista en las enfermedades de los pies.
+              Diagnóstica y trata de forma conservadora o quirúrgica problemas como durezas,
+              uñas encarnadas, verrugas, hongos o alteraciones biomecánicas.
+            </p>
+            <div class="hero-actions">
+              <a href="#services" class="btn btn-primary">Ver servicios</a>
+              <a href="tel:918164350" class="btn btn-secondary">Llámanos</a>
+            </div>
+          </div>
 
-  <h1>Posts</h1>
+          <aside class="hero-card">
+            <p class="card-label">Atención</p>
+            <h2>Consulta personalizada</h2>
+            <ul>
+              <li><i class="fa fa-check"></i> Valoración del dolor y la biomecánica</li>
+              <li><i class="fa fa-check"></i> Tratamiento conservador y quirúrgico</li>
+              <li><i class="fa fa-check"></i> Seguimiento y prevención</li>
+            </ul>
+            <a href="#contact" class="link-arrow">Contacta con nosotros <i class="fa fa-arrow-right"></i></a>
+          </aside>
+        </div>
+      </header>
 
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+      <main>
+        <section id="about" class="info-section">
+          <div class="container split-layout">
+            <div>
+              <p class="eyebrow">¿Qué puede hacer por usted un podólogo?</p>
+              <h2>Especialistas en salud y bienestar del pie</h2>
+              <p>
+                El podólogo se especializa exclusivamente en prevenir, diagnosticar y tratar por
+                medios conservadores y/o quirúrgicos todas las enfermedades que afectan al pie.
+                Es capaz de atender la totalidad del miembro inferior, desde las durezas y las
+                uñas hasta las afecciones dermatológicas y los problemas biomecánicos.
+              </p>
+              <p>
+                En Clínica Pies trabajamos con un enfoque integral para ofrecer soluciones eficaces,
+                personalizadas y orientadas a la prevención para mejorar su movilidad y calidad de vida.
+              </p>
+            </div>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+            <div class="facts-grid">
+              <article>
+                <span class="fact-number">100%</span>
+                <span class="fact-label">tratamiento individualizado</span>
+              </article>
+              <article>
+                <span class="fact-number">1:1</span>
+                <span class="fact-label">atención personalizada</span>
+              </article>
+              <article>
+                <span class="fact-number">+</span>
+                <span class="fact-label">prevención y seguimiento</span>
+              </article>
+            </div>
+          </div>
+        </section>
 
-</div>
+        <section id="services" class="services-section">
+          <div class="container">
+            <div class="section-heading">
+              <p class="eyebrow">Servicios</p>
+              <h2>Tratamientos para cada necesidad</h2>
+            </div>
+
+            <div class="services-grid">
+              <article class="service-card">
+                <img src="./img/services/durezas_hiperqueratosis.png" alt="Durezas" />
+                <div class="service-body">
+                  <h3>DUREZAS</h3>
+                  <p class="service-subtitle">(HIPERQUERATOSIS)</p>
+                  <p>Es el engrosamiento excesivo de la capa más externa de la piel, causado por un aumento en la producción de queratina. En podología, suele manifestarse como áreas de piel endurecida, como callosidades o durezas, especialmente en zonas sometidas a presión o fricción repetida.</p>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <img src="./img/services/unas_encarnadas_onicocriptosis.png" alt="Uñas encarnadas" />
+                <div class="service-body">
+                  <h3>UÑAS ENCARNADAS</h3>
+                  <p class="service-subtitle">(ONICOCRIPTOSIS)</p>
+                  <p>Es una afección conocida como uña encarnada. Ocurre cuando el borde lateral o anterior de la uña se clava en la piel circundante, causando inflamación, dolor, enrojecimiento e incluso infección si no se trata a tiempo.</p>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <img src="./img/services/hongos_pie_atleta.png" alt="Hongos en el pie" />
+                <div class="service-body">
+                  <h3>HONGOS EN EL PIE</h3>
+                  <p class="service-subtitle">(PIE DE ATLETA)</p>
+                  <p>Es una infección fúngica que afecta la piel de los pies, especialmente entre los dedos. Se manifiesta con descamación, enrojecimiento, picazón, grietas o ampollas, pudiendo extenderse a las plantas y los bordes de los pies.</p>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <img src="./img/services/verruga_plantar_papiloma.png" alt="Verruga plantar" />
+                <div class="service-body">
+                  <h3>VERRUGA PLANTAR</h3>
+                  <p class="service-subtitle">(PAPILOMA)</p>
+                  <p>Es una lesión cutánea causada por el virus del papiloma humano (VPH). Aparece como una protuberancia en la planta del pie, a menudo con puntos negros y rodeada de piel endurecida, causando dolor al presionarla.</p>
+                </div>
+              </article>
+
+              <article class="service-card">
+                <img src="./img/services/infecciones_hongos_unas.png" alt="Infecciones por hongos en uñas" />
+                <div class="service-body">
+                  <h3>INFECCIONES POR HONGOS EN UÑAS</h3>
+                  <p>Son afecciones que provocan el engrosamiento, decoloración, fragilidad y deformidad de las uñas, generalmente en los pies, por la invasión de hongos o levaduras.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefits-section">
+          <div class="container">
+            <div class="section-heading centered">
+              <p class="eyebrow">Por qué elegirnos</p>
+              <h2>Atención cercana, técnica y profesional</h2>
+            </div>
+
+            <div class="benefits-grid">
+              <article>
+                <div class="icon-wrap"><i class="fa fa-user-md"></i></div>
+                <h3>Diagnóstico preciso</h3>
+                <p>Valoramos cada problema del pie para diseñar un plan de tratamiento eficaz y seguro.</p>
+              </article>
+              <article>
+                <div class="icon-wrap"><i class="fa fa-heartbeat"></i></div>
+                <h3>Tratamiento integral</h3>
+                <p>Abordamos la causa y la sintomatología para prevenir recaídas y mejorar la movilidad.</p>
+              </article>
+              <article>
+                <div class="icon-wrap"><i class="fa fa-shield"></i></div>
+                <h3>Prevención y seguimiento</h3>
+                <p>Te acompañamos con medidas preventivas para mantener tus pies sanos en el tiempo.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+          <div class="container contact-box">
+            <div class="contact-copy">
+              <p class="eyebrow">Contacto</p>
+              <h2>Contacta con nosotros</h2>
+              <p>
+                Si notas dolor, durezas, molestias de uñas, hongos o cualquier enfermedad del pie,
+                te ayudamos a recuperar la salud del mismo con una atención individualizada.
+              </p>
+              <ul class="contact-list">
+                <li><i class="fa fa-map-marker"></i> Calle Real de San Sebastián, 23<br />Brunete, Madrid (28690)</li>
+                <li><i class="fa fa-phone"></i> <a href="tel:918164350">91 816 43 50</a></li>
+                <li><i class="fa fa-envelope"></i> <a href="mailto:clinicapies.brunete@gmail.com">clinicapies.brunete@gmail.com</a></li>
+                <li><i class="fa fa-facebook"></i> <a href="https://es-es.facebook.com/clinicapies.brunete/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                <li><i class="fa fa-instagram"></i> <a href="https://www.instagram.com/clinicapies/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              </ul>
+            </div>
+
+            <div class="contact-panel">
+              <h3>Horario</h3>
+              <ul>
+                <li><span>Lunes - Viernes</span><strong>09:00 - 14:00</strong></li>
+                <li><span>Martes - Jueves</span><strong>16:30 - 20:30</strong></li>
+                <li><span>Consulta previa</span><strong>Atención personalizada</strong></li>
+              </ul>
+              <a href="tel:918164350" class="btn btn-primary btn-block">Llamar ahora</a>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="map-wrap">
+              <iframe
+                title="Mapa de Clínica Pies"
+                src="https://www.google.com/maps?q=Calle%20Real%20de%20San%20Sebasti%C3%A1n%2C%2023%2C%20Brunete%2C%20Madrid%2028690&z=15&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
