@@ -425,6 +425,29 @@ p {
   font-size: 1.5rem;
 }
 
+.schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.schedule-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.schedule-list strong {
+  text-align: right;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
 .contact-panel ul {
   list-style: none;
   padding: 0;
