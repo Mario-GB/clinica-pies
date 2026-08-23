@@ -692,3 +692,61 @@ img.emoji {
     padding: 1.4rem;
   }
 }
+
+/* Clinic gallery slider styles */
+.clinic-gallery-section { padding: 4rem 0; }
+.clinic-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 75%;
+  margin: 0 auto;
+}
+.clinic-stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(18,36,24,0.06);
+  background: var(--white);
+}
+.clinic-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(.22,.9,.26,1);
+  will-change: transform;
+}
+.clinic-slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clinic-slide .img-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* natural-ish landscape */
+  overflow: hidden;
+}
+.clinic-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Reuse existing carousel button styles but slightly smaller */
+.carousel-btn {
+  background: var(--white);
+  color: var(--text);
+  border: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.6rem;
+  box-shadow: 0 8px 20px rgba(18, 36, 24, 0.08);
+}
+
+@media (max-width: 960px) {
+  .clinic-slider { max-width: 100%; gap: 8px; }
+}
