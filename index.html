@@ -11,6 +11,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./css/simplepage.css" />
+    <style>
+      /* Back to top floating button - styled to match site */
+      .back-to-top {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        width: 52px;
+        height: 52px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary);
+        color: var(--dark);
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 12px 24px rgba(18,36,24,0.12);
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        font-size: 0.95rem;
+      }
+      .back-to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .back-to-top:focus {
+        outline: 3px solid rgba(47,89,53,0.18);
+        outline-offset: 4px;
+      }
+      .back-to-top i { font-size: 1.15rem; }
+
+      @media (max-width: 720px) {
+        .back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+      }
+    </style>
   </head>
   <body>
     <div class="simplepage-shell">
@@ -32,11 +70,11 @@
         <div class="container hero-content">
           <div class="hero-copy">
             <p class="eyebrow">Podología profesional</p>
-            <h1>Tu clínica de podología en Brunete y alrededores</h1>
+            <h1>Tu clínica de podología en Brunete</h1>
             <p class="lead">
-              El podólogo es el profesional sanitario especialista en las enfermedades de los pies.
-              Diagnóstica y trata de forma conservadora o quirúrgica problemas como durezas,
-              uñas encarnadas, verrugas, hongos o alteraciones biomecánicas.
+              <b>Clínica Pies</b> es un centro médico especializado en el diagnóstico y tratamiento de problemas y trastornos del pie.
+              <br>Desde agosto de 2010, Clínica Pies ofrece y garantiza un tratamiento personalizado a cada uno de sus pacientes. Ya sea en la recepción o la sala de consulta, usted se sentirá en buenas manos.
+              <br>Desde el diagnóstico hasta el tratamiento: aqui conocerá todos los servicios podologicos que podemos ofrecerle.
             </p>
             <div class="hero-actions">
               <a href="#services" class="btn btn-primary">Ver servicios</a>
@@ -252,7 +290,31 @@
       </footer>
     </div>
 
+    <button type="button" class="back-to-top" aria-label="Volver arriba"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/pdf-carousel.js"></script>
+    <script>
+      (function () {
+        var btn = document.querySelector('.back-to-top');
+        if (!btn) return;
+        function toggle() {
+          if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+        }
+        document.addEventListener('scroll', toggle, { passive: true });
+        document.addEventListener('DOMContentLoaded', function () {
+          toggle();
+          btn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            btn.blur();
+          });
+          btn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
