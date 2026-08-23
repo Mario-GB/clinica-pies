@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <rect width="100%" height="100%" fill="#f3f9f3" rx="12"/>
+  <g transform="translate(36,24)" fill="#2f5f35">
+    <rect x="0" y="0" width="80" height="120" rx="10" fill="#9fc98d"/>
+    <rect x="110" y="10" width="220" height="40" rx="8" fill="#ffffff" opacity="0.95"/>
+    <rect x="110" y="60" width="180" height="14" rx="6" fill="#ffffff" opacity="0.9"/>
+  </g>
+  <text x="200" y="220" font-family="Montserrat,Arial" font-size="20" text-anchor="middle" fill="#1a2c1f">Biomecánica</text>
+</svg>
