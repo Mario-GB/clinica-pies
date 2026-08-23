@@ -69,10 +69,23 @@ p {
 
 .simplepage-hero {
   position: relative;
-  background: linear-gradient(120deg, rgba(159, 211, 141, 0.8), rgba(215, 239, 200, 0.2)),
-    url("../img/about/pies-colores-0.jpg") no-repeat center/cover;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(120deg, rgba(79, 117, 66, 0.8), rgba(215, 239, 200, 0.2));
   color: var(--white);
   min-height: 680px;
+}
+
+.simplepage-hero::before {
+  content: "";
+  position: absolute;
+  inset: -8% -5% -8% -5%;
+  background: url("../img/about/pies-colores-0.jpg") center/cover no-repeat;
+  width: 90%;
+  height: 90%;
+  opacity: 0.1;
+  place-self: center;
+  z-index: -1;
 }
 
 .simplepage-nav {
