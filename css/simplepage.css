@@ -500,6 +500,26 @@ p {
   border: 0;
 }
 
+.site-footer {
+  background: var(--dark);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 1rem 0;
+  margin-top: 2rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.footer-inner a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .btn-block {
   width: 100%;
 }
