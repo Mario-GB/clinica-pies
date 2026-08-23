@@ -503,7 +503,7 @@ p {
 .site-footer {
   background: var(--dark);
   color: rgba(255, 255, 255, 0.8);
-  padding: 1rem 0;
+  padding: 1rem 0 2px 1rem;
   margin-top: 2rem;
 }
 
@@ -588,6 +588,44 @@ p {
   aspect-ratio: 210 / 297; /* aproximación A4 vertical */
   border: 0;
   background: var(--white);
+}
+
+.solwed-banner.solwed-banner--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.solwed-banner {
+    width: 80%;
+    max-width: 254px;
+    justify-self: center;
+    border-radius: 12px;
+    margin: 8px 0;
+    background: linear-gradient(135deg, #2E3536 0%, #373f40 100%);
+    color: #ffffff;
+    padding: 4px 22px;
+    text-align: center;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+img.emoji {
+  display: inline !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 1em !important;
+  width: 1em !important;
+  margin: 0 0.07em !important;
+  vertical-align: -0.1em !important;
+  background: none !important;
+  padding: 0 !important;
 }
 
 @media (max-width: 960px) {
