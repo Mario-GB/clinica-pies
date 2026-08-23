@@ -137,7 +137,7 @@
             </div>
 
             <div class="services-grid">
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="quiropedia" tabindex="0" role="button" aria-label="Abrir galería de Quiropodia">
                 <img src="./img/services/quiropodia.svg" alt="Quiropodia" />
                 <div class="service-body">
                   <h3>QUIROPODIA</h3>
@@ -146,7 +146,7 @@
                 </div>
               </article>
 
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="biomecanica" tabindex="0" role="button" aria-label="Abrir galería de Biomecánica">
                 <img src="./img/services/biomecanica.svg" alt="Biomecánica" />
                 <div class="service-body">
                   <h3>BIOMECÁNICA</h3>
@@ -155,7 +155,7 @@
                 </div>
               </article>
 
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="diagnostico" tabindex="0" role="button" aria-label="Abrir galería de Técnicas de diagnóstico">
                 <img src="./img/services/diagnostico.svg" alt="Técnicas de diagnóstico" />
                 <div class="service-body">
                   <h3>TÉCNICAS DE DIAGNÓSTICO</h3>
@@ -164,7 +164,7 @@
                 </div>
               </article>
 
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="piediabetico" tabindex="0" role="button" aria-label="Abrir galería de Pie diabético">
                 <img src="./img/services/pie_diabetico.svg" alt="Pie diabético" />
                 <div class="service-body">
                   <h3>PIE DIABÉTICO</h3>
@@ -173,7 +173,7 @@
                 </div>
               </article>
 
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="ortopodologico" tabindex="0" role="button" aria-label="Abrir galería de Tratamientos ortopodológicos">
                 <img src="./img/services/ortopodologicos.svg" alt="Tratamientos ortopodológicos" />
                 <div class="service-body">
                   <h3>TRATAMIENTOS ORTOPODOLOGICOS</h3>
@@ -182,7 +182,7 @@
                 </div>
               </article>
 
-              <article class="service-card">
+              <article class="service-card service-gallery-trigger" data-folder="intervencionismo" tabindex="0" role="button" aria-label="Abrir galería de Técnicas intervencionistas">
                 <img src="./img/services/intervencionistas.svg" alt="Técnicas intervencionistas" />
                 <div class="service-body">
                   <h3>TÉCNICAS INTERVENCIONISTAS</h3>
@@ -225,7 +225,7 @@
           <div class="container">
             <div class="section-heading centered">
               <p class="eyebrow">Documentos</p>
-              <h2>Artículos y documentación</h2>
+              <h2>Artículos de interés</h2>
             </div>
             <div class="pdf-carousel" aria-live="polite">
               <button type="button" class="carousel-btn pdf-prev" aria-label="Ver más recientes">‹</button>
@@ -299,6 +299,25 @@
       </footer>
     </div>
 
+    <div class="service-media-modal" id="serviceMediaModal" aria-hidden="true">
+      <div class="service-media-backdrop" data-close="true"></div>
+      <div class="service-media-dialog" role="dialog" aria-modal="true" aria-labelledby="serviceMediaTitle">
+        <button type="button" class="service-media-close" aria-label="Cerrar galería">×</button>
+        <div class="service-media-header">
+          <p class="eyebrow">Galería</p>
+          <h3 id="serviceMediaTitle">Servicio</h3>
+        </div>
+        <div class="service-media-stage">
+          <button type="button" class="service-media-nav service-media-prev" aria-label="Anterior">‹</button>
+          <div class="service-media-viewport">
+            <div class="service-media-track" id="serviceMediaTrack"></div>
+          </div>
+          <button type="button" class="service-media-nav service-media-next" aria-label="Siguiente">›</button>
+        </div>
+        <div class="service-media-dots" id="serviceMediaDots" aria-label="Selector de imágenes"></div>
+      </div>
+    </div>
+
     <button type="button" class="back-to-top" aria-label="Volver arriba"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
     <script src="js/pdf-carousel.js"></script>
     <script src="js/clinic-slider.js"></script>
@@ -322,6 +341,260 @@
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           });
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var modal = document.getElementById('serviceMediaModal');
+        var title = document.getElementById('serviceMediaTitle');
+        var track = document.getElementById('serviceMediaTrack');
+        var dots = document.getElementById('serviceMediaDots');
+        var closeBtn = document.querySelector('.service-media-close');
+        var prevBtn = document.querySelector('.service-media-prev');
+        var nextBtn = document.querySelector('.service-media-next');
+        var serviceMap = {
+          quiropedia: ['CuadroPies_byn.JPG', 'papilomas_tratados.jpeg'],
+          biomecanica: ['1692524209195.jpg', '1692524210196.jpg', 'VID_20230626_210410.mp4'],
+          diagnostico: ['ecografia.jpeg', 'termografía.jpeg'],
+          piediabetico: [],
+          ortopodologico: ['1692524209313.jpg', 'haciendo_plantillas.mp4', 'muestreo_plantillas.jpeg', 'plantillas_ejemplo.jpeg'],
+          intervencionismo: ['berrugas.png', 'durezas.png', 'infecciónuñas.png', 'piedeatleta.png', 'uñasencarnadas.png']
+        };
+
+        function normalizeMediaList(list) {
+          return (list || []).filter(Boolean).map(function (item) {
+            var type = /\.(mp4|webm|ogg|mov|avi)$/i.test(item) ? 'video' : 'image';
+            return { type: type, src: './img/services/' + item };
+          });
+        }
+
+        function resolveFolderUrl(folder) {
+          return './img/services/' + folder + '/';
+        }
+
+        function inferTitle(folder) {
+          var labels = {
+            quiropedia: 'Quiropodia',
+            biomecanica: 'Biomecánica',
+            diagnostico: 'Técnicas de diagnóstico',
+            piediabetico: 'Pie diabético',
+            ortopodologico: 'Tratamientos ortopodológicos',
+            intervencionismo: 'Técnicas intervencionistas'
+          };
+          return labels[folder] || folder;
+        }
+
+        function buildFallbackMedia(folder) {
+          var items = serviceMap[folder] || [];
+          if (!items.length) {
+            return [];
+          }
+
+          return items.map(function (name) {
+            var type = /\.(mp4|webm|ogg|mov|avi)$/i.test(name) ? 'video' : 'image';
+            return {
+              type: type,
+              src: './img/services/' + folder + '/' + name,
+              name: name
+            };
+          });
+        }
+
+        function parseDirectoryListing(html) {
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(html, 'text/html');
+          var links = Array.from(doc.querySelectorAll('a[href]'));
+          var media = links
+            .map(function (link) {
+              var href = link.getAttribute('href');
+              if (!href) return null;
+              var name = href.split('/').pop();
+              if (!name || name === '../') return null;
+              if (!/\.(png|jpe?g|gif|webp|bmp|svg|mp4|webm|ogg|mov|avi)$/i.test(name)) return null;
+              return name;
+            })
+            .filter(Boolean);
+
+          return Array.from(new Set(media)).map(function (name) {
+            var type = /\.(mp4|webm|ogg|mov|avi)$/i.test(name) ? 'video' : 'image';
+            return {
+              type: type,
+              src: './img/services/' + name,
+              name: name
+            };
+          });
+        }
+
+        function getMediaForFolder(folder) {
+          var fallback = buildFallbackMedia(folder);
+          if (!fallback.length) {
+            return [];
+          }
+
+          var url = resolveFolderUrl(folder);
+          return fetch(url, { cache: 'no-store' })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error('No directory listing');
+              }
+              return response.text();
+            })
+            .then(function (html) {
+              var listed = parseDirectoryListing(html);
+              if (listed.length) {
+                return listed.map(function (item) {
+                  return {
+                    type: item.type,
+                    src: './img/services/' + folder + '/' + item.name,
+                    name: item.name
+                  };
+                });
+              }
+              return fallback;
+            })
+            .catch(function () {
+              return fallback;
+            });
+        }
+
+        var currentItems = [];
+        var currentIndex = 0;
+
+        function renderMedia(items) {
+          currentItems = items || [];
+          currentIndex = 0;
+          track.innerHTML = '';
+          dots.innerHTML = '';
+
+          if (!currentItems.length) {
+            var empty = document.createElement('div');
+            empty.className = 'service-media-empty';
+            empty.textContent = 'No hay imágenes ni vídeos disponibles para este servicio.';
+            track.appendChild(empty);
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return;
+          }
+
+          currentItems.forEach(function (item, index) {
+            var slide = document.createElement('div');
+            slide.className = 'service-media-slide';
+            slide.setAttribute('aria-hidden', index === currentIndex ? 'false' : 'true');
+
+            if (item.type === 'video') {
+              var video = document.createElement('video');
+              video.src = item.src;
+              video.controls = true;
+              video.playsInline = true;
+              video.muted = true;
+              video.autoplay = false;
+              video.loop = false;
+              slide.appendChild(video);
+            } else {
+              var img = document.createElement('img');
+              img.src = item.src;
+              img.alt = item.name || 'Imagen del servicio';
+              slide.appendChild(img);
+            }
+
+            track.appendChild(slide);
+
+            var dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'service-media-dot';
+            dot.setAttribute('aria-label', 'Ir a la imagen ' + (index + 1));
+            dot.addEventListener('click', function () {
+              goTo(index);
+            });
+            dots.appendChild(dot);
+          });
+
+          updateMedia();
+        }
+
+        function updateMedia() {
+          var slides = Array.from(track.children);
+          slides.forEach(function (slide, index) {
+            slide.classList.toggle('active', index === currentIndex);
+            slide.setAttribute('aria-hidden', index === currentIndex ? 'false' : 'true');
+          });
+
+          Array.from(dots.children).forEach(function (dot, index) {
+            dot.classList.toggle('active', index === currentIndex);
+          });
+
+          prevBtn.disabled = currentIndex <= 0;
+          nextBtn.disabled = currentIndex >= Math.max(currentItems.length - 1, 0);
+        }
+
+        function goTo(index) {
+          if (!currentItems.length) return;
+          currentIndex = Math.max(0, Math.min(index, currentItems.length - 1));
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+          updateMedia();
+        }
+
+        function goNext() {
+          if (!currentItems.length) return;
+          goTo(currentIndex + 1);
+        }
+
+        function goPrev() {
+          if (!currentItems.length) return;
+          goTo(currentIndex - 1);
+        }
+
+        function openModal(folder, label) {
+          title.textContent = label || inferTitle(folder);
+          modal.classList.add('visible');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('modal-open');
+
+          getMediaForFolder(folder).then(function (items) {
+            if (!items.length) {
+              items = buildFallbackMedia(folder);
+            }
+            renderMedia(items);
+          });
+        }
+
+        function closeModal() {
+          modal.classList.remove('visible');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          track.innerHTML = '';
+          dots.innerHTML = '';
+          currentItems = [];
+          currentIndex = 0;
+        }
+
+        document.querySelectorAll('.service-gallery-trigger').forEach(function (card) {
+          card.addEventListener('click', function () {
+            openModal(card.dataset.folder, card.querySelector('h3')?.textContent || 'Servicio');
+          });
+          card.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              openModal(card.dataset.folder, card.querySelector('h3')?.textContent || 'Servicio');
+            }
+          });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function (event) {
+          if (event.target && event.target.dataset.close === 'true') {
+            closeModal();
+          }
+        });
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+        document.addEventListener('keydown', function (event) {
+          if (modal.getAttribute('aria-hidden') === 'false') {
+            if (event.key === 'Escape') closeModal();
+            if (event.key === 'ArrowRight') goNext();
+            if (event.key === 'ArrowLeft') goPrev();
+          }
         });
       })();
     </script>
