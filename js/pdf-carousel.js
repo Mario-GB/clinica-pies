@@ -7,11 +7,13 @@
   var $next = $('.pdf-next');
 
   function getVisibleCount() {
-    return window.innerWidth <= 768 ? 1 : 3;
+    // Mostrar siempre un único documento en el carrusel
+    return 1;
   }
 
   function getPreloadCount() {
-    return 4;
+    // Pre-cargar el documento actual + el siguiente para evitar latencia al avanzar
+    return 2;
   }
 
   function extractNumber(fileName) {
@@ -57,12 +59,14 @@
 
     $track.empty();
 
-    $.each(slice, function (_, item) {
+    $.each(slice, function (i, item) {
       var $item = $('<div class="pdf-item"></div>');
+      // Cargar eager el actual y el siguiente para eliminar latencia al avanzar
+      var loadingMode = (i === 0 || i === 1) ? 'eager' : 'lazy';
       var $frame = $('<iframe>', {
         src: viewerUrl(item.url),
         title: item.name,
-        loading: 'lazy'
+        loading: loadingMode
       });
       $item.append($frame);
       $track.append($item);
@@ -87,7 +91,8 @@
         return;
       }
 
-      currentIndex = Math.max(0, files.length - getPreloadCount());
+      // Empezar en el primer documento
+      currentIndex = 0;
       render();
     }).fail(function (xhr) {
       var message = 'No se pudieron cargar los documentos.';
