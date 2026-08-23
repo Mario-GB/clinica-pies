@@ -1,18 +1,20 @@
-(function ($) {
+(function () {
   var repoUrl = 'https://api.github.com/repos/Mario-GB/clinica-pies/contents/docs/articles';
   var files = [];
   var currentIndex = 0;
-  var $track = $('#pdfTrack');
-  var $prev = $('.pdf-prev');
-  var $next = $('.pdf-next');
+  var track = document.getElementById('pdfTrack');
+  var prev = document.querySelector('.pdf-prev');
+  var next = document.querySelector('.pdf-next');
+
+  if (!track || !prev || !next) {
+    return;
+  }
 
   function getVisibleCount() {
-    // Mostrar siempre un único documento en el carrusel
     return 1;
   }
 
   function getPreloadCount() {
-    // Pre-cargar el documento actual + el siguiente para evitar latencia al avanzar
     return 2;
   }
 
@@ -22,23 +24,26 @@
   }
 
   function normalizeFiles(list) {
-    return $.grep(list || [], function (item) {
-      return item && item.type === 'file' && /\.pdf$/i.test(String(item.name || ''));
-    }).map(function (item) {
-      return {
-        name: String(item.name),
-        url: item.download_url || item.html_url || ''
-      };
-    }).sort(function (a, b) {
-      return extractNumber(a.name) - extractNumber(b.name);
-    });
+    return (list || [])
+      .filter(function (item) {
+        return item && item.type === 'file' && /\.pdf$/i.test(String(item.name || ''));
+      })
+      .map(function (item) {
+        return {
+          name: String(item.name),
+          url: item.download_url || item.html_url || ''
+        };
+      })
+      .sort(function (a, b) {
+        return extractNumber(a.name) - extractNumber(b.name);
+      });
   }
 
   function updateButtons() {
     var visibleCount = getVisibleCount();
     var maxIndex = Math.max(0, files.length - visibleCount);
-    $prev.prop('disabled', currentIndex <= 0);
-    $next.prop('disabled', currentIndex >= maxIndex);
+    prev.disabled = currentIndex <= 0;
+    next.disabled = currentIndex >= maxIndex;
   }
 
   function viewerUrl(rawUrl) {
@@ -47,7 +52,7 @@
 
   function render() {
     if (!files.length) {
-      $track.html('<div class="pdf-empty">No hay documentos disponibles.</div>');
+      track.innerHTML = '<div class="pdf-empty">No hay documentos disponibles.</div>';
       return;
     }
 
@@ -57,50 +62,68 @@
     var start = Math.max(0, Math.min(currentIndex, files.length - totalToRender));
     var slice = files.slice(start, start + totalToRender);
 
-    $track.empty();
+    track.innerHTML = '';
 
-    $.each(slice, function (i, item) {
-      var $item = $('<div class="pdf-item"></div>');
-      // Cargar eager el actual y el siguiente para eliminar latencia al avanzar
-      var loadingMode = (i === 0 || i === 1) ? 'eager' : 'lazy';
-      var $frame = $('<iframe>', {
-        src: viewerUrl(item.url),
-        title: item.name,
-        loading: loadingMode
-      });
-      $item.append($frame);
-      $track.append($item);
+    slice.forEach(function (item, index) {
+      var itemNode = document.createElement('div');
+      itemNode.className = 'pdf-item';
+      var loadingMode = (index === 0 || index === 1) ? 'eager' : 'lazy';
+      var frame = document.createElement('iframe');
+      frame.src = viewerUrl(item.url);
+      frame.title = item.name;
+      frame.loading = loadingMode;
+      itemNode.appendChild(frame);
+      track.appendChild(itemNode);
     });
 
     updateButtons();
   }
 
   function loadFiles() {
-    $.ajax({
-      url: repoUrl,
-      method: 'GET',
-      dataType: 'json',
-      headers: {
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    }).done(function (response) {
-      files = normalizeFiles(response || []);
-      if (!files.length) {
-        $track.html('<div class="pdf-empty">No hay documentos disponibles.</div>');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', repoUrl, true);
+    xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+    xhr.setRequestHeader('X-GitHub-Api-Version', '2022-11-28');
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) {
         return;
       }
 
-      // Empezar en el primer documento
-      currentIndex = 0;
-      render();
-    }).fail(function (xhr) {
-      var message = 'No se pudieron cargar los documentos.';
-      if (xhr && xhr.responseJSON && xhr.responseJSON.message) {
-        message = xhr.responseJSON.message;
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          var response = JSON.parse(xhr.responseText);
+          files = normalizeFiles(response || []);
+          if (!files.length) {
+            track.innerHTML = '<div class="pdf-empty">No hay documentos disponibles.</div>';
+            return;
+          }
+
+          currentIndex = 0;
+          render();
+        } catch (error) {
+          track.innerHTML = '<div class="pdf-empty">No se pudieron cargar los documentos.</div>';
+        }
+        return;
       }
-      $track.html('<div class="pdf-empty">' + message + '</div>');
-    });
+
+      var message = 'No se pudieron cargar los documentos.';
+      try {
+        var jsonResponse = JSON.parse(xhr.responseText || '{}');
+        if (jsonResponse && jsonResponse.message) {
+          message = jsonResponse.message;
+        }
+      } catch (error) {
+        // Ignored.
+      }
+      track.innerHTML = '<div class="pdf-empty">' + message + '</div>';
+    };
+
+    xhr.onerror = function () {
+      track.innerHTML = '<div class="pdf-empty">No se pudieron cargar los documentos.</div>';
+    };
+
+    xhr.send();
   }
 
   function goPrevious() {
@@ -114,10 +137,8 @@
       render();
     }
 
-    if (currentIndex <= 0) {
-      $prev.prop('disabled', true);
-    }
-    $next.prop('disabled', currentIndex >= maxIndex);
+    prev.disabled = currentIndex <= 0;
+    next.disabled = currentIndex >= maxIndex;
   }
 
   function goNext() {
@@ -131,16 +152,12 @@
       render();
     }
 
-    if (currentIndex >= maxIndex) {
-      $next.prop('disabled', true);
-    }
-    $prev.prop('disabled', currentIndex <= 0);
+    prev.disabled = currentIndex <= 0;
+    next.disabled = currentIndex >= maxIndex;
   }
 
-  $(function () {
-    $prev.on('click', goPrevious);
-    $next.on('click', goNext);
-    $(window).on('resize', render);
-    loadFiles();
-  });
-})(jQuery);
+  prev.addEventListener('click', goPrevious);
+  next.addEventListener('click', goNext);
+  window.addEventListener('resize', render);
+  loadFiles();
+})();

@@ -113,19 +113,18 @@
               </p>
             </div>
 
-            <div class="facts-grid">
-              <article>
-                <span class="fact-number">100%</span>
-                <span class="fact-label">tratamiento individualizado</span>
-              </article>
-              <article>
-                <span class="fact-number">1:1</span>
-                <span class="fact-label">atención personalizada</span>
-              </article>
-              <article>
-                <span class="fact-number">+</span>
-                <span class="fact-label">prevención y seguimiento</span>
-              </article>
+            <div class="clinic-slider" aria-label="Galería de la clínica">
+              <button type="button" class="carousel-btn clinic-prev" aria-label="Foto anterior">‹</button>
+
+              <div class="clinic-stage" id="clinicStage">
+                <div class="clinic-track" id="clinicTrack">
+                  <!-- Slides injected by JS -->
+                </div>
+              </div>
+
+              <button type="button" class="carousel-btn clinic-next" aria-label="Foto siguiente">›</button>
+
+              <div class="clinic-dots" id="clinicDots" aria-hidden="false"></div>
             </div>
           </div>
         </section>
@@ -191,27 +190,6 @@
                   <p>Procedimientos mínimamente invasivos como tratamiento de uñas encarnadas y técnicas de infiltración para control del dolor local cuando procede.</p>
                 </div>
               </article>
-            </div>
-          </div>
-        </section>
-
-        <!-- Nueva sección: Galería de la clínica -->
-        <section class="clinic-gallery-section">
-          <div class="container">
-            <div class="section-heading centered">
-              <p class="eyebrow">Nuestra clínica</p>
-              <h2>Instalaciones y espacio</h2>
-            </div>
-
-            <div class="clinic-slider" aria-label="Galería de la clínica">
-              <button type="button" class="carousel-btn clinic-prev" aria-label="Foto anterior">‹</button>
-
-              <div class="clinic-stage" id="clinicStage">
-                <div class="clinic-track" id="clinicTrack">
-                  <!-- Slides injected by JS -->
-                </div>
-              </div>
-              <button type="button" class="carousel-btn clinic-next" aria-label="Foto siguiente">›</button>
             </div>
           </div>
         </section>
@@ -322,7 +300,6 @@
     </div>
 
     <button type="button" class="back-to-top" aria-label="Volver arriba"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/pdf-carousel.js"></script>
     <script src="js/clinic-slider.js"></script>
     <script>

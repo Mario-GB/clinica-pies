@@ -294,21 +294,6 @@ p {
   margin-bottom: 1.2rem;
 }
 
-.facts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.facts-grid article {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 2rem 1.25rem;
-  text-align: center;
-  box-shadow: 0 10px 24px var(--shadow);
-}
-
 .fact-number {
   display: block;
   font-family: "Montserrat", "Segoe UI", sans-serif;
@@ -658,10 +643,6 @@ img.emoji {
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .facts-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 720px) {
@@ -683,8 +664,7 @@ img.emoji {
   }
 
   .services-grid,
-  .benefits-grid,
-  .facts-grid {
+  .benefits-grid {
     grid-template-columns: 1fr;
   }
 
@@ -696,19 +676,26 @@ img.emoji {
 /* Clinic gallery slider styles */
 .clinic-gallery-section { padding: 4rem 0; }
 .clinic-slider {
-  display: flex;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
   max-width: 75%;
   margin: 0 auto;
 }
+.clinic-prev,
+.clinic-next {
+  grid-row: 1;
+}
 .clinic-stage {
+  grid-column: 2;
   position: relative;
-  width: 100%;
+  width: 24rem;
   overflow: hidden;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(18,36,24,0.06);
   background: var(--white);
+  justify-self: center;
 }
 .clinic-track {
   display: flex;
@@ -723,14 +710,41 @@ img.emoji {
 }
 .clinic-slide .img-wrap {
   width: 100%;
-  aspect-ratio: 4 / 3; /* natural-ish landscape */
+  aspect-ratio: 4 / 3;
+  position: relative;
+  padding-top: calc(100% * 3 / 4);
   overflow: hidden;
+  min-height: 180px;
 }
 .clinic-slide img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.clinic-dots {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+.clinic-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(17, 34, 20, 0.22);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.clinic-dot.active {
+  background: var(--primary-dark);
+  transform: scale(1.2);
 }
 
 /* Reuse existing carousel button styles but slightly smaller */
